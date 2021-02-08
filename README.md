@@ -55,9 +55,11 @@
 
         그러니까 어플리케이션 저체에 흧어진 공통 기능이 하나의 장소에서 관리된다.
 
-        ![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/b640428a-6b9a-489b-aac5-2d2a766fc962/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/b640428a-6b9a-489b-aac5-2d2a766fc962/Untitled.png)
+        ![image](https://user-images.githubusercontent.com/68880203/107168404-aa050f00-69fe-11eb-9d64-8c3513db8ab0.png)
 
-        ![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/c1eb28d4-4709-4b9e-a679-74702cad51fc/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/c1eb28d4-4709-4b9e-a679-74702cad51fc/Untitled.png)
+
+        ![image](https://user-images.githubusercontent.com/68880203/107168426-b4bfa400-69fe-11eb-8d6e-25c3c15cf88c.png)
+
 
         - **타겟 (Target)**
 
@@ -83,7 +85,8 @@
 
         : 
 
-        ![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/35785244-7e11-46c6-a666-3e9293690ed5/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/35785244-7e11-46c6-a666-3e9293690ed5/Untitled.png)
+        ![image](https://user-images.githubusercontent.com/68880203/107168481-da4cad80-69fe-11eb-9cef-0acd7558cb02.png)
+
 
         - Interceptor와 Filter는 Servlet 단위에서 실행된다. <> 반면 AOP는 메소드 앞에 Proxy패턴의 형태로 실행된다.
         - 실행순서를 보면 Filter가 가장 밖에 있고 그안에 Interceptor, 그안에 AOP가 있는 형태이다.
