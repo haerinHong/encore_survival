@@ -1,5 +1,8 @@
 # encore_survival
 🐣 신입병아리들의 살아남기
+
+[업무기초]https://www.notion.so/0331949cc450471a8014868c4637b862
+
 1. **Overload VS Override**
 
     : Overloading = 같은 이름의 메소드가 여러 개 가지면서, 매개변수의 유형과 개수가 다르도록 하는 것
