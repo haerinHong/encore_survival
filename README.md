@@ -40,7 +40,7 @@
 
             : 하나의 스레드에 문제 발생시 전체 프로세스가 영향을 받는다.
 
-        3. **Spring의 aop란?**
+     3. **Spring의 aop란?**
 
         :  애플리케이션 전체에 걸쳐 사용되는 기능을 재사용 하도록 지원하는 것
 
@@ -56,7 +56,7 @@
 
         : 공통된 기능 재사용
 
-        그러니까 어플리케이션 저체에 흧어진 공통 기능이 하나의 장소에서 관리된다.
+        그러니까 어플리케이션 전체에 흩어진 공통 기능이 하나의 장소에서 관리된다.
 
         ![image](https://user-images.githubusercontent.com/68880203/107168404-aa050f00-69fe-11eb-9d64-8c3513db8ab0.png)
 
@@ -70,7 +70,7 @@
 
             getBoards 혹은 getUsers를 하는 Service 들
 
-        - **에스펙트 (Aspect)**
+        - **애스펙트 (Aspect)**
 
             : 객체지향 모듈을 오프젝트라 부르는것과 비슷하게 부가기능 모듈을 애스펙트라고 부르며, **핵심기능에 부가되어 의미를 갖는 특별한 모듈**
 
@@ -84,7 +84,7 @@
 
         [추가 자료](https://jojoldu.tistory.com/71)
 
-        4. Filter VS Interceptor
+     4. **Filter VS Interceptor**
 
         : 
 
@@ -188,7 +188,7 @@
 
         @Around: 대상 메서드의 수행 전/후
 
-        5. mybatis의 Association VS Collection
+     5. **mybatis의 Association VS Collection**
 
         :
         Mybatis에서 관계를 정의하는 방법
@@ -197,7 +197,7 @@
         
         [참고 링크](https://goodgid.github.io/Mybatis-Association-Collection-Part-1/)
 
-        6.  param 값
+     6.  **param 값**
 
         public class t1 {
 
@@ -222,7 +222,7 @@
 
         결과 : {aaa=bbb, ID=guest, NAME=게스트}
 
-        7. 부서정보 조회
+     7. **부서정보 조회**
 
         Q) 상위 부서가 존재하는 계층형 구조를 조회하는 방법 설명
 
@@ -233,15 +233,32 @@
         **START WITH** parent_id IS NULL --루트노드를 지정,
         **CONNECT BY** **PRIOR** item_id = parent_id;--부모와 자식노드들간의 관계를 연결
 
-        8. 결재 후 메일발송 요건을 처리하는 방법은?
+     8. **결재 후 메일발송 요건을 처리하는 방법은?**
 
         단, 메일발송의 실패와 상관없이 결재는 정상처리 되어야한다.
 
         결재기능은 이미 개발된 상태이며 결재기능의 수정없이 메일발송만 추가해야한다.
+        **예외처리**
+        public void Func_메일발송() throws Exception {
+            //메일발송 기능
+        }
+        public void Func_결재(){
+            //결재 기능
+            try{
+                Func_메일발송();
+            } catch(Exception e) {
+                //예외처리
+            } finally {
+                //결재 마무리
+            }
+        }
 
-        9. 사용자의 권한체크를 위해 인터셉터를 활용하여 처리중입니다. 사용자의 권한이 없을 경우 false를 리턴합니다. 권한이 없는 경우 form의 서브밋을 호출한 경우와 ajax를 호출한 경우, 처리 방법은?
-
-        10.  그리드 데이터를 한번에 멀티로 CRUD를 처리하기 위해 브라우저에서 서버로 보내는 방법과 서버에서 처리하는 방법은? 
+     9. **사용자의 권한체크를 위해 인터셉터를 활용하여 처리중입니다. 사용자의 권한이 없을 경우 false를 리턴합니다. 권한이 없는 경우 form의 서브밋을 호출한 경우와 ajax를 호출한 경우, 처리 방법은?**
+        **Submit**  : 동기 방식으로 form 태그 내부의 page 전체를 새로그림.
+        **ajax**    : 비동기 방식으로 원하는 Data만 변경
+        -> Submit 방식에서 false를 리턴받을 경우에는 false에 해당하는 page를 미리 준비해두고 전송한다.
+        -> ajax : form 태그 내부의 Data를 변경하여 사용자 권한이 없음을 알린다.
+     10. **그리드 데이터를 한번에 멀티로 CRUD를 처리하기 위해 브라우저에서 서버로 보내는 방법과 서버에서 처리하는 방법은? **
 
         (예. 사용자 정보 : id, 이름, 이메일)
 
@@ -250,8 +267,8 @@
         **2. json array 및 json object에 대하여 쿼리를 가공하여 db처리를 해준다**
 
         - Reference ([https://roqkffhwk.tistory.com/104](https://roqkffhwk.tistory.com/104)) - ext.js
-
-        11. 결재대상 A에 대해 승인자1이 해당 목록을 조회 중
+     
+     11. **결재대상 A에 대해 승인자1이 해당 목록을 조회 중**
 
         결재대상 A에 대해 승인자2가 해당 목록을 조회 중
 
@@ -267,7 +284,7 @@
 
         이렇게 되면 승인자2는 결재 권한을 갖지 못함으로 동시에 두명의 승인자가 결재를 하는 문제를 해결할 수 있다.
 
-        12. 주기적으로 DB를 백업하거나 특정시간 혹은 몇분 혹은 몇시간마다 동작하려 외부시스템에 접속하여 데이터를 가져오는 작업을 spring에서 처리하는 방법
+     12. **주기적으로 DB를 백업하거나 특정시간 혹은 몇분 혹은 몇시간마다 동작하려 외부시스템에 접속하여 데이터를 가져오는 작업을 spring에서 처리하는 방법**
 
         : **Spring Scheduler- crontab 사용**
 
