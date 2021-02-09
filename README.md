@@ -187,7 +187,12 @@
 
         5. mybatis의 Association VS Collection
 
-        : [참고 링크](https://goodgid.github.io/Mybatis-Association-Collection-Part-1/)
+        :
+        Mybatis에서 관계를 정의하는 방법
+         - Nested Select : 1번의 추가 Select을 통한 데이터 검색
+        - Nested Results : Join을 통해 한번에 데이터를 검색
+        
+        [참고 링크](https://goodgid.github.io/Mybatis-Association-Collection-Part-1/)
 
         6.  param 값
 
