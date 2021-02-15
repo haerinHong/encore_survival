@@ -220,6 +220,10 @@ Reference ([https://jieun0113.tistory.com/115](https://jieun0113.tistory.com/115
 1.
 
 2. 
+| 구분 | Oracle |       PostgreSQL          |
+| ------ | ------ | ------------------------- |
+| from 중첩 |select * from (select * from table_name); | select * from (select * from table_name) as alias_name; |
+| join | select a.field1, b.field2 from a, b where a.item_id = b.item_id(+); | select a.field1, b.field2 from a left outer join b on a.item_id = b.item_id; | 
 
 3. DataBase를 여러개 연결해야 할 경우 방법?
  - **Mybatis Ver.**
