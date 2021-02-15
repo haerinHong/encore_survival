@@ -217,18 +217,23 @@ Reference ([https://jieun0113.tistory.com/115](https://jieun0113.tistory.com/115
 
 # 2021-02-10 
 
-1. 
+1.
 
 2. 
-```
-SELECT * FROM schema명.테이블명;
-SELECT * FROM schema명.테이블명 WHERE 컬럼명='찾고싶은값';
-```
-**PostgreSQL VS Oracle** (join)
 
-| 구분 | Oracle |       PostgreSQL          |
-| ------ | ------ | ------------------------- |
-| from절 subquery |select * from (select * from table_name); | select * from (select * from table_name) as alias_name; |
-| outer join | select a.field1, b.field2 from a, b where a.item_id = b.item_id(+); | select a.field1, b.field2 from a left outer join b on a.item_id = b.item_id; | 
-
-3. 
+3. DataBase를 여러개 연결해야 할 경우 방법?
+ - **Mybatis Ver.**
+    1) pom.xml에 의존성 추가
+    2) 사용할 DBMS 라이브러리 pom.xml에 추가
+    3) application-config.xml에 DB 접속 정보 추가
+    4) aop:config tag 내부 수정
+    5) 세션 정의
+Reference ([https://roqkffhwk.tistory.com/117](https://roqkffhwk.tistory.com/117))
+: 2개의 MySQL DB 사용
+    
+ - **JPA Ver.**
+    1) pom.xml에 의존성 추가
+    2) @Configuration에 DB 접속정보 추가(Main DB에 @Primary 사용가능)
+    3) application.properties 설정
+Reference ([https://https://eternalteach.tistory.com/67](https://https://eternalteach.tistory.com/67))
+:MySQL + PostgreSQL 사용
