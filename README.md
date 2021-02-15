@@ -220,5 +220,15 @@ Reference ([https://jieun0113.tistory.com/115](https://jieun0113.tistory.com/115
 1. 
 
 2. 
+```
+SELECT * FROM schema명.테이블명;
+SELECT * FROM schema명.테이블명 WHERE 컬럼명='찾고싶은값';
+```
+**PostgreSQL VS Oracle** (join)
+
+| 구분 | Oracle |       PostgreSQL          |
+| ------ | ------ | ------------------------- |
+| from절 subquery |select * from (select * from table_name); | select * from (select * from table_name) as alias_name; |
+| outer join | select a.field1, b.field2 from a, b where a.item_id = b.item_id(+); | select a.field1, b.field2 from a left outer join b on a.item_id = b.item_id; | 
 
 3. 
