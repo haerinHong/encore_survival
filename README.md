@@ -239,5 +239,60 @@ Reference ([https://roqkffhwk.tistory.com/117](https://roqkffhwk.tistory.com/117
     1) pom.xml에 의존성 추가
     2) @Configuration에 DB 접속정보 추가(Main DB에 @Primary 사용가능)
     3) application.properties 설정
-Reference ([https://https://eternalteach.tistory.com/67](https://https://eternalteach.tistory.com/67))
+Reference ([https://eternalteach.tistory.com/67](https://eternalteach.tistory.com/67))
 :MySQL + PostgreSQL 사용
+
+# 2021-02-17
+1. 다중 데이터 베이스 연동
+2. LoginProcess 분석(loginController.java)
+    - 결과 반환을 위한 String, Object 속성을 갖는 Map 객체 생성 => resultMap
+    - session 가져오기
+    - 사용자의 parameter를 Map에 저장 => param
+    - Param 암/복호화를 위한 Try/catch
+    - 초기설정해둔 maxAllowedLoginFailCount 값 가져오기 => maxAllowedLoginFailCount
+    - ldap에 대한 HashMap 생성
+    - loginId가 admin이 아닐 경우 SSO 로그인이라면 return
+    - 로그아웃 허용 기간에 따라 접근 제한이 가능하도록 업데이트 후 return
+    - ldap 연동 사용시
+        - ldapresult의 rslt속성이 error일 경우 최대 로그인 횟수 체크 및 접근 제한 및 업데이트
+        - rslt 속성이 error가 아니라면 로그인 성공
+    - ldap result가 null일경우
+        - 세션 정보에 따라 로그인 성공 or Meta pass or 로그인 실패 구현
+    - 로그인 실패 유저들에 대한 정보인 recentFailedUsers 해쉬맵 가져오기
+    - 무차별 공격에 대한 timegap 초기값 가져오기
+    - 1초 이내에 로그인한 유저가 다시 로그인 시도 시 실패 처리 로직
+    - Password 속성의 param encoding 후 새로 추가
+    - commonService와 매칭되는 param 정보를 userInfo로 저장
+    - userInfo가 null인 경우 로그인 실패 처리
+        - 로그인 실패 유저 목록에 추가
+        - FailCount++
+        - 일정 Count초과시 계정 잠금
+    - UserInfo가 null이 아닐경우
+        - Access 계정인지 확인 후 알림
+        - Access 계정이라면
+            - 실패 횟수 초기화
+            - Access 계정인지, 암호에 대한 정보 삭제
+            - 로그인한 유저에 대한 Session값, 쿠키 값 불러오기
+     - 현재 로그인 되어있는 유저인지 확인할 activeUsers속성값 가져오기
+     - 로그인 되어있는지 확인
+        - 로그인 되어있을 경우 세션의 기존 ㅅ용자 삭제 후 다시 activeUsers에 등록
+        - 로그인이 안되어 있을 경우 session에서 activeUsers 속성 설정 후 activeUsers 등록
+     - 무차별 대입에서 사용했던 속성 삭제
+     - resultMap에 login 성공 속성 부여
+     - requestedQueryString에 대한 정보 확인 및 Empty검사
+        - null이 아닐 경우 result Map에 해당하는 page 정보 저장 후 requestQueryString 속성 삭제
+        - null일 경우 index.action에 대한 page 정보 저장
+     - 로그인 정보 저장
+     - 세션 초기화
+     - 로그인 성공 return
+     - 
+3. 계정 잠금과 해제 방법 찾아오기
+    - 계정 잠금
+    : commonService에 updateAccessBlockLoginFailAccumulation 속성을 param(UserInfo)과 매칭시켜서 부여
+      if(commonService.getData("updateAccessBlockLoginFailAccumulation", param))으로 해당 계정이 잠금인지 확인 가능
+    - 계정 잠금 해제
+    : commonService.delete("updateAccessBlockLoginFailAccumulation", param)) 으로 해당 속성 해제
+    
+4. 로그인 프로세스 종료시 index.action 프로세스
+    - 로그인성공시 resultMap 이라는 Map에 url 속성을 index.action이라고 저장 후 메서드 반환값으로 ModelAndView라는 객체를 "JsonView"라는 viewname을 부여하여 return
+    - 로그인 프로세스 완료후 Interceptor의 postHandle에서 ModelAndView객체의 Model에 해당하는 url을 response
