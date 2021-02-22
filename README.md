@@ -296,3 +296,27 @@ Reference ([https://eternalteach.tistory.com/67](https://eternalteach.tistory.co
 4. 로그인 프로세스 종료시 index.action 프로세스
     - 로그인성공시 resultMap 이라는 Map에 url 속성을 index.action이라고 저장 후 메서드 반환값으로 ModelAndView라는 객체를 "JsonView"라는 viewname을 부여하여 return
     - 로그인 프로세스 완료후 Interceptor의 postHandle에서 ModelAndView객체의 Model에 해당하는 url을 response
+
+# 2021-02-18
+1. Context란?
+    - 필요한 파일들이 들어있는 가상 경로
+    - Context Path ?
+    : WAS에서 웹 어플리케이션을 구분하기 위한 path
+2. Additional이 담는 것 찾아오기
+    - Session의 additional 속성을 가져옴
+    - Login Controller에서 loginProcessByUserId 메서드로 로그인 시도시, menuId가 "widget"이 아니라면 param 정보를 json으로 직렬화 하여 세션의 additional 속성 주입
+    - param
+        - request의 parameter를 가져옴
+        - "password" : 암호화된 비밀번호
+        - "USER_CHANGE_REQUESTED_BY" : 세선의 USER_CHANGE_REQUESTED_BY 속성
+        - "loginId" : 유저의 정보
+        - Param에 default로 저장된 정보를 포함하여 "loginId", "menu", "password", "additional" 속성 삭제
+        - "data" : param의 기존 data를 gson 방식으로 직렬화
+3. Quicktip이란?
+    - 요소에 마우스 오버시 추가정보를 나타나게 하는 효과를 tooltip 이라고 하는데, Ext.QuickTips.init()메서드를 실행해야 tooltip 효과를 나타낼 수 있다.
+4. Ext.State.Manager.setProvider?
+    사용자의 상태 정보를 위한 Manager Class에서 상태 정보를 저장하기 위한 set 메서드
+5. 공지사항 옵션 확인해보기
+    - 로그인시 공지사항 tab 팝업 시키기
+    1) App.js의 Dataware.config.common('useModalNotice')) 설정 True로 바꾸기
+    2) Proxy의 ACTIVENOTICEONLY 속성 N으로 변경
