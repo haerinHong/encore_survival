@@ -320,3 +320,12 @@ Reference ([https://eternalteach.tistory.com/67](https://eternalteach.tistory.co
     - 로그인시 공지사항 tab 팝업 시키기
     1) App.js의 Dataware.config.common('useModalNotice')) 설정 True로 바꾸기
     2) Proxy의 ACTIVENOTICEONLY 속성 N으로 변경
+# 2021-02-23
+
+1.	대시보드에서 승인 더블클릭시 데이터표준 – 신청/승인 란으로 이동 후 자동 팝업되는 프로세스 찾아오기
+-	myTodo.js -> Ext.apply의 listeners -> itemdblclick 이벤트를 통해 신청/승인 탭 생성
+    1) Meta.lib -> callBack에서 Ext.create를 통해 탭 생성(contents.add(tab))
+    2) 탭 이동 (contents.setActiveTab(tab));을 통해 탭 이동
+-	Popup 생성
+    1) ApprovalList.js의 activate 이벤트 바인딩으로 팝업 생성(me.down(‘#searchBtn’).handler();
+
