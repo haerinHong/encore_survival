@@ -23,4 +23,4 @@
 3. LG화X Amazon Glue plugin Postgresql → Oracle 로 변환 
 
 4. KOTRX Cubrid 갭분석
- - 
+ - DB : Tibero 6, Cubrid 10.2
